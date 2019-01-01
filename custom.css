@@ -1,0 +1,138 @@
+ body {
+            margin: 0;
+            padding: 0;
+            background: #3c7890;
+        }
+        
+        .container {
+            position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    width: 100%;
+	    height: 100%;
+        }
+        
+        .mainapp {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            border-bottom: 20px;
+            border-bottom: 20px solid #22a4b4;
+           transform:scale(0.8);
+          
+        }
+        
+        .clean {
+            position: relative;
+	    height: 560px;
+	    background: #fff;
+	    width: 88%;
+	    margin: auto; 
+	    text-align:center;
+        }
+        
+        .controls {
+            position: relative;
+            top: 2px;
+            height: 40px;
+        }
+        
+        .fa-arrow-left {
+            position: relative;
+            font-size: 20px;
+            color: #4c4c4c;
+        }
+        
+        span.right {
+            position: relative;
+            letter-spacing: 14px;
+            font-size: 20px;
+            top: 2px;
+            margin: 0 -12px;
+        }
+        
+        .fa-reply,
+        .fa-share-alt,
+        .fa-ellipsis-v {
+            color: #4c4c4c;
+        }
+        
+        h1 {
+            font-family: Metropolis;
+            font-size: 40px;
+            color: #0598ab;
+        }
+        
+        span.date {
+            font-family: Metropolis;
+            font-size: 14px;
+            position: relative;
+            top: -28px;
+            color: #525252;
+        }
+        
+        textarea {
+            font-family: Arial, Helvetica, sans-serif;
+	    font-size: 18px;
+	    position: relative;
+	    top: -22px;
+	    color: #525252;
+	    width: 100%;
+	    height: 56%;
+	    padding:6px;
+        }
+        
+        ul {
+            position: absolute;
+            bottom: 0;
+            display: flex;
+        }
+        
+        ul li {
+            list-style-type: none;
+        }
+        
+        .lt {
+            position: absolute;
+            height: 42px;
+            bottom: -16px;
+            z-index: 25;
+            left: 160px;
+        }
+        
+        .btm {
+            width: 100%;
+            height: 16px;
+            background: #22a4b4;
+            position: absolute;
+            bottom: 0px;
+        }
+        
+        span.extra {
+            position: relative;
+        }
+        
+        span.extra img {
+            height: 36px;
+            padding: 0 16px;
+            position: relative;
+            top: 10px;
+        }
+        
+        .active {
+            border-bottom: 2px solid #1cc175;
+        }
+        
+        .fa-bookmark {
+            position: absolute;
+            right: 6px;
+            top: 84px;
+            color: #E91E63;
+            font-size: 20px;
+        }
+
+

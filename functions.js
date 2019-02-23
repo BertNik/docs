@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 		    }
 		}
-		http.send('data='+JSON.stringify({text:document.getElementsByTagName('textarea')[0].value}));
+		http.send('data='+JSON.stringify({text:encodeURIComponent(document.getElementsByTagName('textarea')[0].value)}));
 		});	
 
  	  
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 		    }
 		}
-		http.send('data='+JSON.stringify({text:document.getElementsByTagName('textarea')[0].value}));
+		http.send('data='+JSON.stringify({text:encodeURIComponent(document.getElementsByTagName('textarea')[0].value)}) ) ;
 	    }
     	}
 

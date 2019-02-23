@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		//'enter' is pressed
 		//todo code
 		break;
-	    case 83:
+	    case 67:
 		//'c' is pressed
 		if (lastKeyPress[lastKeyPress.length - 1] == 'Control') {
 		    setTimeout(function() {//todo code when alt + ctrl + c is pressed

@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			
 		});
 	});
+	document.querySelector('.fa.fa-ellipsis-v').addEventListener('click',(a)=>{
+		window.open( "/notes", "_blank")
+	});
 	let params = new URLSearchParams(window.location.search);
 	if (params.has('note')) {
 		document.getElementById('filename').value = "./notes/" + params.get('note') + ".txt"

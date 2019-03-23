@@ -1,0 +1,38 @@
+.note {
+    background: #eee;
+    box-shadow: #999 1px 1px 3px;
+    margin: auto;
+    padding-top: 40px;
+    min-height: 200px;
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-width: 500px;
+}
+.date {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  font-size: 0.7em;
+  font-style: italic;
+  color: #000;
+}
+.icons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+}
+div[contenteditable] {
+    font-size: 1.2em;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    width: 100%;
+    padding: 10px 20px 10px;
+    min-height: 300px;
+    background: #f9f9f9;
+}

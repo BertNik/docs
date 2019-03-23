@@ -7,12 +7,24 @@
    </head>
    <body>
       <div class="note">
-      <span class="date">Friday 22 March, 2019 at 7:11PM</span>
-      <span class="icons">
-         <i class="fa fa-pencil fa-lg" ></i>
-         <i class="fa fa-trash-o fa-lg" ></i>
-      </span>
-      <div class="markdown-body textarea" contenteditable="true"></div>
+        <span class="date">Friday 22 March, 2019 at 7:11PM</span>
+        <span class="icons">
+            <i class="fa fa-pencil fa-lg" ></i>
+            <i class="fa fa-trash-o fa-lg" ></i>
+        </span>
+        <div class="markdown-body textarea" contenteditable="true">
+      </div>
       <input id="filename" type="hidden">
+    </div>
+      <div class="note_list">
+        <span class="date">Note List</span>
+            <span class="icons">
+                <i class="fa fa-pencil fa-lg" ></i>
+                <i class="fa fa-trash-o fa-lg" ></i>
+            </span>
+            <div class="markdown-body list" contenteditable="false">
+        </div>
+      </div>
+      
    </body>
 </html>

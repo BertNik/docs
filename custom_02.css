@@ -1,4 +1,5 @@
 .note {
+    
     background: #eee;
     box-shadow: #999 1px 1px 3px;
     margin: auto;
@@ -35,4 +36,16 @@ div[contenteditable] {
     padding: 10px 20px 10px;
     min-height: 300px;
     background: #f9f9f9;
+}
+.note_list{
+    background: #eee;
+    box-shadow: #999 1px 1px 3px;
+    margin: auto;
+    padding-top: 40px;
+    min-height: 200px;
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    max-width: 500px;
 }

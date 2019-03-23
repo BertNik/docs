@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setInterval(getDate, 1000*20);
     getDate();
-
+	getListItems();
     let params = new URLSearchParams(window.location.search);
 	if (params.has('note')) {
 		document.getElementById('filename').value = params.get('note');
@@ -26,8 +26,21 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
     }
     
-    
 })
+const getListItems = () =>{
+    const url = '/action.php?cmd=getListItems';
+    fetch(url,{
+        method:'GET',
+    }).then((...t)=>{
+        t[0].json().then((a)=>{
+            if(a.success){
+            	document.querySelector('.list').innerHTML = `${JSON.parse(a.success).map((val)=>{
+            		return `<a href="/?note=${val.replace(".txt","")}"><li>${val}</li></a>`;
+            	}).join("")}`;
+            }
+        });
+    });
+}
 const save = () => {
     const url = '/action.php?cmd=save&filename='+document.getElementById('filename').value;
     fetch(url,{
@@ -45,12 +58,9 @@ const save = () => {
 }
 
 const keyHandler = (() => {
-    let lastKeyPress = []
-    //when key is pressed...
+    let lastKeyPress = [];
     document.onkeydown = function (e) {
-
         e = e || window.event;
-
         switch (e.keyCode) {
             case 13:
                 //'enter' is pressed
@@ -66,10 +76,8 @@ const keyHandler = (() => {
                     }, 500);
                 }
         }
-
         //push key name into array
-        lastKeyPress.push(e.key)
-
+        lastKeyPress.push(e.key);
         //clear array or leave put
     }
 })()

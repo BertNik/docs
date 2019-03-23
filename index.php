@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
    </head>
    <body>
+   <div class="container">
       <div class="note">
         <span class="date">Friday 22 March, 2019 at 7:11PM</span>
         <span class="icons">
@@ -25,6 +26,6 @@
             <div class="markdown-body list" contenteditable="false">
         </div>
       </div>
-      
+      </div>
    </body>
 </html>

@@ -45,7 +45,7 @@ const Note = function Note(){
 					return `<a href="/?note=${val.replace(".txt","")}"><li>${val}</li></a>`;
 				}).join("")}`;
 			}else{
-				throw "Unable to get note.";
+				throw "Unable to get List Items.";
 			}
 		})();
 	}

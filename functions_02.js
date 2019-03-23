@@ -69,19 +69,26 @@ const Note = function Note(){
 	}
 
 	Module.keyHandler = (() => {
-		let timeStamps = [];
+		let timeStamps = [], canSave = true;
 		document.onkeydown = function (e) {
 			timeStamps.push(e.timeStamp);
-			if(timeStamps.length>1){
-				let diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
-				if(diff>2){
-					Module.save();
+			let diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
+			diff > .5 || canSave ? (async function a(){
+					canSave = false;
+					const p = await (function(){
+						return new Promise ((res,rej)=>{
+							setTimeout(()=>{
+								res(Module.save());
+							},1000);
+						}); 
+					})()
 					timeStamps.splice(0,timeStamps.length-2);
-				}
-			}else{
-				Module.save();
-			}
+					canSave = true;
+				})() : '';
+			
 		}
+		document.onkeydown(new Event('onkeydown'));
+
 	})()
 	return {init:Module.init}
 }

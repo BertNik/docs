@@ -68,11 +68,14 @@ const Note = function Note(){
 			try{
 				result = await getData.json();
 			}catch(e){
-				throw "Result could not be JSON parsed.";
+				throw "Result could not be JSON parsed."; 
 			} 
 			if(result.success){
 				document.getElementById('filename').value = result.success;
 				console.log('saved');
+				if(result.warning){
+					console.log(result.warning);
+				}
 			}else if(!noQueryParams && !queryParams.has("note")){
 				throw "Unable to get file.";
 			}

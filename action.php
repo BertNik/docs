@@ -1,18 +1,23 @@
 <?php
 $noteDir = "./notes/";
 $noteExtension = ".txt";
+$warning = "";
 if(isset($_GET['filename']) && $_GET['filename'] !== ''){
     if(isset($_GET['cmd']) && $_GET['cmd'] === 'getData'){
         $file = $noteDir.$_GET['filename'].$noteExtension;
         $data = file_get_contents($file);
-        echo json_encode(array('success' => $data));
-	    die;
+	    die(json_encode(array('success' => $data)));
     }else if(isset($_GET['cmd']) && $_GET['cmd'] === 'save'){
         $name = $_GET['filename'];
         $text =  json_decode($_POST['data'],true)['text'];
-        $fileCreated = file_put_contents($noteDir.$name.$noteExtension, $text);
-        echo json_encode(array('success' => $fileCreated ? $name : $fileCreated));
-        die;
+        if(base64_encode(base64_decode($text)) === $text){
+            $fileCreated = file_put_contents($noteDir.$name.$noteExtension, $text);
+        }else{
+            $text = base64_decode($text);
+            $warning = "data saved may have been corrupted.";
+            $fileCreated = file_put_contents($noteDir.$name.$noteExtension, $text);
+        }
+        die(json_encode(array('success' => $fileCreated ? $name : $fileCreated, 'warning' => $warning)));
     }
 }else if(isset($_GET['cmd']) && $_GET['cmd'] === 'getListItems'){
     $dirs = scandir($noteDir);

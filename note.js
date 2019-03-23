@@ -10,7 +10,7 @@ const Note = function Note(){
 			setInterval(getDate, 1000*20);
 			getDate();
 			Module.getListItems();
-			let params = new URLSearchParams(window.location.search);
+			const params = new URLSearchParams(window.location.search);
 			if (params.has('note')) {
 				document.getElementById('filename').value = params.get('note');
 				(async function getData(){
@@ -18,8 +18,13 @@ const Note = function Note(){
 						return fetch('/action.php?cmd=getData&filename=' + filename,{
 							method:'GET',
 						});
-					})(document.getElementById('filename').value)
-					const getJsonData = await getTextData.json();
+					})(document.getElementById('filename').value);
+					let getJsonData;
+					try{
+						getJsonData = await getTextData.json();
+					}catch(e){
+						throw "Response could not be JSON parsed.";
+					}
 					if(getJsonData.success || getJsonData.success === ""){
 						document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success);
 					}else{
@@ -27,7 +32,6 @@ const Note = function Note(){
 					}
 				})();
 			}
-
 		})
 	}
 	
@@ -59,11 +63,18 @@ const Note = function Note(){
 					body: `data=${JSON.stringify({text:btoa(document.getElementsByClassName('textarea')[0].innerText)})}`
 				})
 			})();
-			const result = await getData.json();
+			let result;
+			const queryParams = new URLSearchParams(window.location.search), noQueryParams = queryParams.entries().next().done;
+			try{
+				result = await getData.json();
+			}catch(e){
+				throw "Result could not be JSON parsed.";
+			} 
 			if(result.success){
 				document.getElementById('filename').value = result.success;
-			}else{
-				throw "Unable to save file.";
+				console.log('saved');
+			}else if(!noQueryParams && !queryParams.has("note")){
+				throw "Unable to get file.";
 			}
 		})()
 	}
@@ -84,7 +95,7 @@ const Note = function Note(){
 					})()
 					timeStamps.splice(0,timeStamps.length-2);
 					canSave = true;
-				})() : '';
+				})() : undefined;
 			
 		}
 		document.onkeydown(new Event('onkeydown'));

@@ -25,14 +25,14 @@ if(isset($_GET['filename']) && $_GET['filename'] !== ''){
         return !preg_match(',^\.,i',$dirs) && !preg_match(',php$,i',$dirs);
     };
     $removeExt = function($a){
-        return str_replace(".txt", "", $a);
+        return str_replace($noteExtension, "", $a);
     };
     $noExtension = array_map($removeExt, array_filter($dirs, $removeHidden));
     die(json_encode(array('success' => json_encode( array_values($noExtension) ))));
 }else if(isset($_GET['filename']) && $_GET['filename'] === ''){ 
     $text =  json_decode($_POST['data'],true)['text'];
     $time = time();
-    $name = './notes/'.$time.'.txt'; 
+    $name = $noteDir.$time.$noteExtension; 
     $fileCreated = file_put_contents($name, $text);
-    echo json_encode(array('success' => $fileCreated ? $time : $fileCreated)); 
+    die(json_encode(array('success' => $fileCreated ? $time : $fileCreated))); 
 }

@@ -10,51 +10,56 @@ document.addEventListener("DOMContentLoaded", function() {
     let params = new URLSearchParams(window.location.search);
 	if (params.has('note')) {
 		document.getElementById('filename').value = params.get('note');
-		getTextData(document.getElementById('filename').value);
-		function getTextData(filename) {
-			fetch('/action.php?cmd=getData&filename=' + filename,{
-				method:'GET',
-				headers: {'Content-type':'application/x-www-form-urlencoded'}
-			}).then((...t)=>{
-				t[0].json().then((a)=>{
-					if(a.success){
-						let data = a.success;
-						document.getElementsByClassName('textarea')[0].innerText = atob(data);
-					}
+		(async function getData(){
+			const getTextData = await (function getTextData(filename) {
+				return fetch('/action.php?cmd=getData&filename=' + filename,{
+					method:'GET',
 				});
-			});
-		}
+			})(document.getElementById('filename').value)
+			const getJsonData = await getTextData.json();
+			if(getJsonData.success){
+				document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success);
+			}else{
+				throw "Unable to get note.";
+			}
+		})();
     }
     
 })
 const getListItems = () =>{
     const url = '/action.php?cmd=getListItems';
-    fetch(url,{
-        method:'GET',
-    }).then((...t)=>{
-        t[0].json().then((a)=>{
-            if(a.success){
-            	document.querySelector('.list').innerHTML = `${JSON.parse(a.success).map((val)=>{
-            		return `<a href="/?note=${val.replace(".txt","")}"><li>${val}</li></a>`;
-            	}).join("")}`;
-            }
-        });
-    });
+    (async function gl(){
+		const getList = await (function() {
+				return fetch(url,{
+					method:'GET',
+				});
+		})();
+		const result = await getList.json();
+		if(result.success){
+			document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
+				return `<a href="/?note=${val.replace(".txt","")}"><li>${val}</li></a>`;
+			}).join("")}`;
+		}else{
+			throw "Unable to get List Items.";
+		}
+	})();
 }
 const save = () => {
     const url = '/action.php?cmd=save&filename='+document.getElementById('filename').value;
-    fetch(url,{
-        method:'POST',
-        headers: {'Content-type':'application/x-www-form-urlencoded'},
-        body: `data=${JSON.stringify({text:btoa(document.getElementsByClassName('textarea')[0].innerText)})}`
-    }).then((...t)=>{
-        console.log(t);
-        t[0].json().then((a)=>{
-            if(a.success){
-                document.getElementById('filename').value = a.success;
-            }
-        });
-    });
+    (async function sav(){
+    	const getData = await (function(){
+    		return fetch(url,{
+				method:'POST',
+				body: `data=${JSON.stringify({text:btoa(document.getElementsByClassName('textarea')[0].innerText)})}`
+			})
+    	})();
+    	const result = await getData.json();
+		if(result.success){
+			document.getElementById('filename').value = result.success;
+		}else{
+			throw "Unable to save file.";
+		}
+    })()
 }
 
 const keyHandler = (() => {

@@ -8,7 +8,7 @@
    <body>
    <div class="container">
       <div class="note">
-        <span class="date">Friday 22 March, 2019 at 7:11PM</span>
+        <span class="date"></span>
         <span class="icons">
             <i class="fa fa-pencil fa-lg" ></i>
             <i class="fa fa-trash-o fa-lg" ></i>

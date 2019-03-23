@@ -1,2 +1,2 @@
 #!/bin/bash
-cd ../; php -S localhost:9999  
+cd ../; nohup php -S localhost:9999 > /dev/null 2>&1

@@ -69,27 +69,18 @@ const Note = function Note(){
 	}
 
 	Module.keyHandler = (() => {
-		let lastKeyPress = [];
+		let timeStamps = [];
 		document.onkeydown = function (e) {
-			e = e || window.event;
-			switch (e.keyCode) {
-				case 13:
-					//'enter' is pressed
-					//todo code
-					break;
-				case 67:
-					//'c' is pressed
-					if (lastKeyPress[lastKeyPress.length - 1] == 'Control') {
-						setTimeout(function () {//todo code when alt + ctrl + c is pressed
-							console.log('saving');
-							Module.save();
-							lastKeyPress = [];
-						}, 500);
-					}
+			timeStamps.push(e.timeStamp);
+			if(timeStamps.length>1){
+				let diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
+				if(diff>2){
+					Module.save();
+					timeStamps.splice(0,timeStamps.length-2);
+				}
+			}else{
+				Module.save();
 			}
-			//push key name into array
-			lastKeyPress.push(e.key);
-			//clear array or leave put
 		}
 	})()
 	return {init:Module.init}

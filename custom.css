@@ -1,138 +1,74 @@
- body {
-            margin: 0;
-            padding: 0;
-            background: #3c7890;
-        }
-        
-        .container {
-            position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%, -50%);
-	    width: 100%;
-	    height: 100%;
-        }
-        
-        .mainapp {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #fff;
-            border-bottom: 20px;
-            border-bottom: 20px solid #22a4b4;
-           transform:scale(0.8);
-          
-        }
-        
-        .clean {
-            position: relative;
-	    height: 560px;
-	    background: #fff;
-	    width: 88%;
-	    margin: auto; 
-	    text-align:center;
-        }
-        
-        .controls {
-            position: relative;
-            top: 2px;
-            height: 40px;
-        }
-        
-        .fa-arrow-left {
-            position: relative;
-            font-size: 20px;
-            color: #4c4c4c;
-        }
-        
-        span.right {
-            position: relative;
-            letter-spacing: 14px;
-            font-size: 20px;
-            top: 2px;
-            margin: 0 -12px;
-        }
-        
-        .fa-reply,
-        .fa-share-alt,
-        .fa-ellipsis-v {
-            color: #4c4c4c;
-        }
-        
-        h1 {
-            font-family: Metropolis;
-            font-size: 40px;
-            color: #0598ab;
-        }
-        
-        span.date {
-            font-family: Metropolis;
-            font-size: 14px;
-            position: relative;
-            top: -28px;
-            color: #525252;
-        }
-        
-        textarea {
-            font-family: Arial, Helvetica, sans-serif;
-	    font-size: 18px;
-	    position: relative;
-	    top: -22px;
-	    color: #525252;
-	    width: 100%;
-	    height: 56%;
-	    padding:6px;
-        }
-        
-        ul {
-            position: absolute;
-            bottom: 0;
-            display: flex;
-        }
-        
-        ul li {
-            list-style-type: none;
-        }
-        
-        .lt {
-            position: absolute;
-            height: 42px;
-            bottom: -16px;
-            z-index: 25;
-            left: 160px;
-        }
-        
-        .btm {
-            width: 100%;
-            height: 16px;
-            background: #22a4b4;
-            position: absolute;
-            bottom: 0px;
-        }
-        
-        span.extra {
-            position: relative;
-        }
-        
-        span.extra img {
-            height: 36px;
-            padding: 0 16px;
-            position: relative;
-            top: 10px;
-        }
-        
-        .active {
-            border-bottom: 2px solid #1cc175;
-        }
-        
-        .fa-bookmark {
-            position: absolute;
-            right: 6px;
-            top: 84px;
-            color: #E91E63;
-            font-size: 20px;
-        }
+.note {
+    background: #eee;
+    box-shadow: #999 1px 1px 3px;
+    margin: auto;
+    padding-top: 40px;
+    min-height: 200px;
+    display: block;
+    position: absolute;
+    width: 51%;
+    left: 11px;
+    overflow: hidden;
+    /* max-width: 700px; */
+    min-width: 262px;
+}
+.list{
+  text-align: center !important;
+}
+.note_list{
+    background: #eee;
+    box-shadow: #999 1px 1px 3px;
+    margin: auto;
+    padding-top: 40px;
+    min-height: 200px;
+    display: block;
+    position: absolute;
+    left: 55%;
+    overflow: hidden;
+    min-width: 220px;
+    width: 43%;
+    text-align: center;
+}
+.container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-width: 535px;
+}
+body > div > div.note_list > span.date{
+    position: absolute;
+    top: 15px;
+    left: 44%;
+    padding: 0px;
+}
+.date {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  font-size: 0.7em;
+  font-style: italic;
+  color: #000;
+}
+body > div > div.note_list > span.icons{
+  display:none;
+}
 
-
+.icons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 10px;
+}
+div[contenteditable] {
+    font-size: 1.2em;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: none;
+    box-shadow: none;
+    margin: 0px;
+    padding: 10px 20px 10px;
+    min-height: 300px;
+    background: #f9f9f9;
+    list-style: none;
+    text-align: left;
+}

@@ -1,18 +1,22 @@
 <?php
-register_shutdown_function( "fatal_handler" );
+include_once './includes.php';
 
-class Main{
+use ActionTests as at;
+
+class Action{
     
-    private $noteDir = "./notes/", $noteExtension = ".txt", $allTestCases = false, $isCli = false,
-            $definedCases = array();
+    private $noteDir = "./notes/", 
+            $noteExtension = ".txt", 
+            $isCli = false;
     
     public function __construct($arg=null){
         if($arg === 'cli'){
             $this->isCli = true;
+            $testCases = new at\Action_Tests();
             $numberArgs = count($_SERVER['argv']);
             if($numberArgs > 1){
                 $args = array_splice($_SERVER['argv'], 1);
-                $this->testCases($args[0]);
+                $testCases::test($args[0]);
             }  
         }
         $response = $this->actions();
@@ -20,16 +24,21 @@ class Main{
     }
     private function actions(){
         $action = $this->determineAction();
-        if($action['isGetData']){
-            return $this->getData();
-        }else if($action['isSaveData']){
-            return $this->saveData();
-        }else if($action['isGetListItems']){
-            return $this->getListItems();
-        }else if($action['isCreateNote']){ 
-            return $this->createNote();
-        }else if($action['isDelete']){
-            return $this->deleteNote();
+        $case = array_intersect($action,[true]);
+        if(count($case) > 1) return 'too many cases';
+        switch(array_keys($case)[0]){
+            case 'isGetData':
+                return $this->getData();
+            case 'isSaveData':
+                return $this->saveData();
+            case 'isGetListItems':
+                return $this->getListItems();
+            case 'isCreateNote':
+                return $this->createNote();
+            case 'isDelete':
+                return $this->deleteNote();
+            default:
+                return 'no valid arguments passed';
         }
     }
     private function determineAction(){
@@ -45,7 +54,6 @@ class Main{
         
         
         return array(
-            'noFileName' => $noFileName,
             'isGetData' => $isGetData,
             'isSaveData' => $isSaveData,
             'isGetListItems' => $isGetListItems,
@@ -94,97 +102,9 @@ class Main{
         $fileDeleted = unlink($this->noteDir.$name.$this->noteExtension);
         return (json_encode(array('success' => $fileDeleted )));
     }
-    private function testCases($arg){
-        
-        $this->definedCases = [
-            'noFileName',
-            'isGetData',
-            'isGetData_fail',
-            'isSaveData',
-            'isSaveData_fail',
-            'isCreateNote',
-            'isDelete',
-            'isDelete_fail',
-            'listTestCases'
-        ];
-        $runTest = function($case){
-            switch($case){
-                case 'noFileName':
-                    $_GET['filename'] = '';
-                    break;
-                case 'isGetData':
-                    $_GET['filename'] = "testfilename";
-                    $_GET['cmd'] = 'getData';
-                    break;
-                case 'isGetData_fail':
-                    $_GET['filename'] = "";
-                    $_GET['cmd'] = 'getData';
-                    break;
-                case 'isSaveData':
-                    $_GET['cmd'] = 'save';
-                    $_GET['filename'] = "filename";
-                    $data = array('text'=> base64_encode('test'));
-                    $_POST['data'] = json_encode($data);
-                    break;
-                case 'isSaveData_fail':
-                    $_GET['cmd'] = 'save';
-                    $_GET['filename'] = "";
-                    break;
-                case 'isCreateNote':
-                    $_GET['filename'] = "";
-                    break;
-                case 'isDelete':
-                    $_GET['filename'] = 'filename';
-                    $_GET['cmd'] = 'delete';
-                    $_SERVER['REQUEST_METHOD'] = 'DELETE';
-                    break;
-                case 'isDelete_fail':
-                    $_GET['filename'] = '';
-                    $_GET['cmd'] = 'delete';
-                    $_SERVER['REQUEST_METHOD'] = 'DELETE';
-                    break;
-                case 'listTestCases':
-                    die(var_dump($this->definedCases));
-                    break;
-                default:
-                    echo sprintf("%s\n", $arg);
-                    break;
-            }
-            if($this->allTestCases) {
-                $locallyDefinedVars = get_defined_vars();
-                var_dump(
-                        sprintf("%s", 
-                                json_encode( 
-                                                array( 'defined_vars' => $locallyDefinedVars, 
-                                                    'GET' => $_GET, 
-                                                    'POST' => $_POST,
-                                                    'SERVER[REQUEST_METHOD]' => $_SERVER['REQUEST_METHOD']
-                                                ), JSON_PRETTY_PRINT
-                                            )
-                                )
-                        );
-            }
-        };
-        if($arg === 'allTestCases'){
-            $this->allTestCases = true;
-            unset($this->definedCases[count($this->definedCases)-1]);
-            array_map($runTest, $this->definedCases);
-        }else{
-            $runTest($arg);
-        }
-        
-    }
 }
 if(php_sapi_name() == "cli"){
-    $m = new Main('cli');
+    $m = new Action('cli');
 }else{
-    $m = new Main();
+    $m = new Action();
 }
-
-function fatal_handler(){
-    $error = error_get_last();
-    if ($error['type'] === E_ERROR) { 
-        var_dump(debug_backtrace()); 
-    } 
-}
-

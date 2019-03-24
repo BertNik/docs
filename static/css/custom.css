@@ -36,10 +36,10 @@
     min-width: 535px;
 }
 body > div > div.note_list > span.date{
-    position: absolute;
-    top: 15px;
-    left: 44%;
-    padding: 0px;
+    /* position: absolute; */
+    /* top: 15px; */
+    /* left: 44%; */
+    /* padding: 0px; */
 }
 .date {
   position: absolute;

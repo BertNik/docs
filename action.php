@@ -43,6 +43,7 @@ class Main{
                     && $_GET['filename'] !== '' && $_GET['cmd'] === 'delete' 
                     && $_SERVER['REQUEST_METHOD'] === 'DELETE';
         
+        
         return array(
             'noFileName' => $noFileName,
             'isGetData' => $isGetData,

@@ -14,6 +14,7 @@
             <i class="fa fa-trash-o fa-lg" ></i>
         </span>
         <div class="markdown-body textarea" contenteditable="true">
+        
       </div>
       <input id="filename" type="hidden">
     </div>

@@ -29,6 +29,9 @@
     width: 43%;
     text-align: center;
 }
+.getNote{
+  padding-right:10px
+}
 .container{
     position: absolute;
     width: 100%;

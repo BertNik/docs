@@ -1,5 +1,10 @@
 <?php
+register_shutdown_function( "fatal_handler" );
+
+
+
 class Main{
+    
     private $noteDir = "./notes/", $noteExtension = ".txt";
     public function __construct(){
         $noteDir = $this->noteDir;
@@ -41,6 +46,25 @@ class Main{
             $fileCreated = file_put_contents($name, $text);
             die(json_encode(array('success' => $fileCreated ? $time : $fileCreated))); 
         }
+        
+        if(isset($_GET['filename']) && isset($_GET['cmd']) 
+                    && $_GET['filename'] !== '' && $_GET['cmd'] === 'delete' 
+                    && $_SERVER['REQUEST_METHOD'] === 'DELETE'){
+            $name = $_GET['filename'];
+            $fileDeleted = unlink($noteDir.$name.$noteExtension);
+            die(json_encode(array('success' => $fileDeleted )));
+        }
+        
     }
 }
+
 $m = new Main();
+
+function fatal_handler(){
+    $error = error_get_last();
+    // fatal error, E_ERROR === 1
+    if ($error['type'] === E_ERROR) { 
+        var_dump(debug_backtrace()); 
+    } 
+    
+}

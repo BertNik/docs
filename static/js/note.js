@@ -91,7 +91,7 @@ const Note = function Note(){
 				if(result.warning){
 					console.log(result.warning);
 				}
-			}else if(!noQueryParams && !queryParams.has("note")){
+			}else if(!noQueryParams && !queryParams.has("note") && false){
 				throw "Unable to get file.";
 			}
 		})()

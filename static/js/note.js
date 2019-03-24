@@ -33,7 +33,7 @@ const Note = function Note(){
 				throw "Response could not be JSON parsed.";
 			}
 			if(getJsonData.success || getJsonData.success === ""){
-				document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success);
+				document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success).trim();
 			}else{
 				//throw "Unable to get note.";
 			}

@@ -15,6 +15,7 @@ const Note = function Note(){
 				document.getElementById('filename').value = params.get('note');
 				Module.getData();
 			}
+			window.onhashchange = Module.hashChange;
 		})
 	}
 	Module.getData = (filename) => {
@@ -95,6 +96,16 @@ const Note = function Note(){
 				throw "Unable to get file.";
 			}
 		})()
+	}
+	Module.hashChange = (e) =>{
+		const getHash = (url)=>{
+			return url.slice(url.indexOf("#")+2);
+		}
+		const newPath = getHash(e.newURL);
+		const oldPath = getHash( e.oldURL);
+		Module.delete(oldPath);
+		Module.save(newPath);
+		Module.getListItems();
 	}
 	Module.save = (filename) => {
 		const url = '/action.php?cmd=save&filename='+ (filename !== undefined ? filename : document.getElementById('filename').value);

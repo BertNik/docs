@@ -63,8 +63,6 @@ const Note = function Note(){
 					a.addEventListener('click',(e)=>{
 						e.preventDefault();
 						Module.delete(e.target.getAttribute('data'));
-						
-						
 					})
 				});
 			}else{

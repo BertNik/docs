@@ -63,7 +63,7 @@ const Note = function Note(){
 					a.addEventListener('click',(e)=>{
 						e.preventDefault();
 						Module.delete(e.target.getAttribute('data'));
-						Module.getListItems();
+						
 						
 					})
 				});
@@ -92,6 +92,7 @@ const Note = function Note(){
 				if(result.warning){
 					console.log(result.warning);
 				}
+				Module.getListItems();
 			}else if(false && !noQueryParams && !queryParams.has("note")){
 				throw "Unable to get file.";
 			}

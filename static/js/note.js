@@ -46,7 +46,7 @@ const Note = function Note(){
 			const result = await getList.json();
 			if(result.success){
 				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
-					return `<a href="/?note=${val.replace(".txt","")}"><li>${val}</li></a>`;
+					return `<a href="/?note=${val}"><li>${val}</li></a>`;
 				}).join("")}`;
 			}else{
 				throw "Unable to get List Items.";

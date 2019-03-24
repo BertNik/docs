@@ -34,7 +34,7 @@ const Note = function Note(){
 			if(getJsonData.success || getJsonData.success === ""){
 				document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success);
 			}else{
-				throw "Unable to get note.";
+				//throw "Unable to get note.";
 			}
 		})();
 

@@ -149,11 +149,25 @@ class Main{
                     echo sprintf("%s\n", $arg);
                     break;
             }
-            if($this->allTestCases) var_dump(get_defined_vars());
+            if($this->allTestCases) {
+                $locallyDefinedVars = get_defined_vars();
+                var_dump(
+                        sprintf("%s", 
+                                json_encode( 
+                                                array( 'defined_vars' => $locallyDefinedVars, 
+                                                    'GET' => $_GET, 
+                                                    'POST' => $_POST,
+                                                    'SERVER[REQUEST_METHOD]' => $_SERVER['REQUEST_METHOD']
+                                                ), JSON_PRETTY_PRINT
+                                            )
+                                )
+                        );
+            }
         };
         if($arg === 'allTestCases'){
             $this->allTestCases = true;
-            array_map($runTest, $definedCases);
+            unset($this->definedCases[count($this->definedCases)-1]);
+            array_map($runTest, $this->definedCases);
         }else{
             $runTest($arg);
         }

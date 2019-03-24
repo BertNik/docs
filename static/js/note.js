@@ -102,7 +102,7 @@ const Note = function Note(){
 		}
 		const newPath = getHash(e.newURL);
 		const oldPath = getHash( e.oldURL);
-		Module.delete(oldPath);
+		//Module.delete(oldPath);
 		Module.save(newPath);
 		Module.getListItems();
 	}

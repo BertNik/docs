@@ -51,7 +51,7 @@ const Note = function Note(){
 			const result = await getList.json();
 			if(result.success){
 				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
-					return `<a href="/#/${val}"><li class="getNote" data="${val}">${val}<i class="fa fa-trash-o fa-lg delete" data="${val}"></i></li></a>`;
+					return `<a href="/#/${val}"><li><span class="getNote" data="${val}">${val}</span><i class="fa fa-trash-o fa-lg delete" data="${val}"></i></li></a>`;
 				}).join("")}`;
 				[...document.querySelectorAll('.getNote')].map((a)=>{
 					a.addEventListener('click',(e)=>{
@@ -126,6 +126,7 @@ const Note = function Note(){
 			} 
 			if(result.success){
 				document.getElementById('filename').value = result.success;
+				Module.getListItems();
 				if(result.warning){
 					console.log(result.warning);
 				}
@@ -154,7 +155,7 @@ const Note = function Note(){
 				})() : undefined;
 			
 		}
-		document.onkeydown(new Event('onkeydown'));
+		//document.onkeydown(new Event('onkeydown'));
 
 	})()
 	return {init:Module.init}

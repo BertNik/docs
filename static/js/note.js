@@ -1,8 +1,8 @@
 "use strict";
 const Note = function Note(){
-	const Module = {};
-	Module.init = function(){
-		return document.addEventListener("DOMContentLoaded", function() {
+	const Module = {},actionURL = 'action.php';
+	Module.init = function init(){
+		document.addEventListener("DOMContentLoaded", function() {
 			const getDate = function getDate () {
 				const d = (()=>{
 						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US';
@@ -18,18 +18,13 @@ const Note = function Note(){
 			setInterval(getDate, 1000*20);
 			getDate();
 			Module.getListItems();
-			const params = new URLSearchParams(window.location.search);
-			if (params.has('note')) {
-				document.getElementById('filename').value = params.get('note');
-				Module.getData();
-			}
 			window.onhashchange = Module.hashChange;
 		})
 	}
 	Module.getData = (filename) => {
 		(async function getData(){
 			const getTextData = await (function getTextData(filename) {
-				return fetch('/action.php?cmd=getData&filename=' + filename,{
+				return fetch(`/${actionURL}?cmd=getData&filename=${filename}`,{
 					method:'GET',
 				});
 			})(filename !== undefined ? filename : document.getElementById('filename').value);
@@ -49,9 +44,9 @@ const Note = function Note(){
 
 	}
 	Module.getListItems = () =>{
-		const url = '/action.php?cmd=getListItems';
+		const url = `/${actionURL}?cmd=getListItems`;
 		(async function gl(){
-			const getList = await (function() {
+			const getList = await (function fet() {
 					return fetch(url,{
 						method:'GET',
 					});
@@ -79,7 +74,7 @@ const Note = function Note(){
 		})();
 	}
 	Module.delete = (filename) => {
-		const url = '/action.php?cmd=delete&filename='+ (filename !== undefined ? filename : document.getElementById('filename').value);
+		const url = `/${actionURL}?cmd=delete&filename=${(filename !== undefined ? filename : document.getElementById('filename').value)}`;
 		(async function del(){
 			const getData = await (function(){
 				return fetch(url,{
@@ -115,7 +110,7 @@ const Note = function Note(){
 		Module.getListItems();
 	}
 	Module.save = (filename) => {
-		const url = '/action.php?cmd=save&filename='+ (filename !== undefined ? filename : document.getElementById('filename').value);
+		const url = `/${actionURL}?cmd=save&filename=${(filename !== undefined ? filename : document.getElementById('filename').value)}`;
 		(async function sav(){
 			const getData = await (function(){
 				return fetch(url,{

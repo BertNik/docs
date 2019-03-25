@@ -175,7 +175,10 @@ const Note = function Note(){
 		}
 		//document.onkeydown(new Event('onkeydown'));
 	})()
-	return {init:Module.init}
+	return {
+		init:Module.init,
+		allModules: Module
+	}
 }
 window._Note = Note();
 _Note.init();

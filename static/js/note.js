@@ -21,7 +21,7 @@ const Note = function Note(){
 						return {
 							hour: localeString(0),
 							am_pm: localeString(1),
-							min_secs: min_seconds_date('min_secs'),
+							min_secs: min_seconds_date('min_sec'),
 							date:min_seconds_date('date'),
 						}
 					})();

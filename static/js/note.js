@@ -109,9 +109,9 @@ const Note = function Note(){
 			return url.slice(url.indexOf("#")+2);
 		}
 		const newPath = getHash(e.newURL);
-		const oldPath = getHash( e.oldURL);
+		//const oldPath = getHash( e.oldURL);
 		//Module.delete(oldPath);
-		Module.save(newPath);
+		//Module.save(newPath);
 		Module.getListItems();
 	}
 	Module.save = (filename) => {

@@ -86,6 +86,7 @@ const Note = function Note(){
 					})(), getDataByNoteNameHandler = (() => {
 						[...document.querySelectorAll('.getNote')].map((a)=>{
 							a.addEventListener('click',(e)=>{
+								if(e.target.tagName === "INPUT") return;
 								Module.getData(e.target.getAttribute('data'));
 
 							})

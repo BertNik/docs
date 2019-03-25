@@ -174,9 +174,9 @@ const Note = function Note(){
 			}
 		})()
 	}
-	Module.keyHandler = (() => {
+	Module.keyHandler = () => {
 		let timeStamps = [], canSave = true;
-		document.onkeydown = function (e) {
+		document.querySelector('.note').onkeydown = function (e) {
 			timeStamps.push(e.timeStamp);
 			let diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
 			diff > .5 || canSave ? (async function a(){
@@ -193,7 +193,7 @@ const Note = function Note(){
 				})() : undefined;
 		}
 		//document.onkeydown(new Event('onkeydown'));
-	})()
+	}
 	return {
 		init:Module.init,
 		allModules: Module

@@ -5,8 +5,8 @@ class Action_Tests{
     private static  $allTestCases = false,
                     $definedCases = array();
 
-    public  function __construct(){
-        return self;
+    public function __construct(){
+        return $this;
     }
 
     public static function test($arg){
@@ -20,7 +20,9 @@ class Action_Tests{
             'isCreateNote',
             'isDelete',
             'isDelete_fail',
-            'listTestCases'
+            'allTestCases',
+            'listTestCases',
+            
         ];
         $runTest = function($case){
             switch($case){
@@ -56,13 +58,15 @@ class Action_Tests{
                 case 'isDelete_fail':
                     $_GET['filename'] = '';
                     $_GET['cmd'] = 'delete';
+                    $data = array('text'=> base64_encode('test'));
+                    $_POST['data'] = json_encode($data);
                     $_SERVER['REQUEST_METHOD'] = 'DELETE';
                     break;
                 case 'listTestCases':
                     die(var_dump(self::$definedCases));
                     break;
                 default:
-                    echo sprintf("%s\n", $arg);
+                    echo isset($arg) ? sprintf("%s\n", $arg) : '[no arg]';
                     break;
             }
             if(self::$allTestCases) {
@@ -73,7 +77,7 @@ class Action_Tests{
                                                 array( 'defined_vars' => $locallyDefinedVars, 
                                                     'GET' => $_GET, 
                                                     'POST' => $_POST,
-                                                    'SERVER[REQUEST_METHOD]' => $_SERVER['REQUEST_METHOD']
+                                                    'SERVER[REQUEST_METHOD]' => isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : ''
                                                 ), JSON_PRETTY_PRINT
                                             )
                                 )

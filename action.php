@@ -72,6 +72,7 @@ class Action{
         $text =  json_decode($_POST['data'],true)['text'];
         if(base64_encode(base64_decode($text)) === $text){
             $fileCreated = file_put_contents($this->noteDir.$name.$this->noteExtension, $text);
+            
         }else{
             $text = base64_decode($text);
             $warning = "data saved may have been corrupted.";

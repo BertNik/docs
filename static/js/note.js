@@ -53,7 +53,6 @@ const Note = function Note(){
 				//throw "Unable to get note.";
 			}
 		})();
-
 	}
 	Module.getListItems = () =>{
 		const url = `/${actionURL}?cmd=getListItems`;
@@ -173,10 +172,8 @@ const Note = function Note(){
 					timeStamps.splice(0,timeStamps.length-2);
 					canSave = true;
 				})() : undefined;
-			
 		}
 		//document.onkeydown(new Event('onkeydown'));
-
 	})()
 	return {init:Module.init}
 }

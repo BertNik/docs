@@ -142,7 +142,6 @@ const Note = function Note(){
 				})
 			})();
 			let result;
-			const queryParams = new URLSearchParams(window.location.search), noQueryParams = queryParams.entries().next().done;
 			try{
 				result = await getData.json();
 			}catch(e){
@@ -154,12 +153,9 @@ const Note = function Note(){
 				if(result.warning){
 					console.log(result.warning);
 				}
-			}else if(!noQueryParams && !queryParams.has("note")){
-				throw "Unable to get file.";
 			}
 		})()
 	}
-
 	Module.keyHandler = (() => {
 		let timeStamps = [], canSave = true;
 		document.onkeydown = function (e) {

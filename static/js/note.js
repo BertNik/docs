@@ -5,12 +5,24 @@ const Note = function Note(){
 		document.addEventListener("DOMContentLoaded", function() {
 			const getDate = function getDate () {
 				const d = (()=>{
-						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US';
+						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US',
+						localeString = (x) => {
+							return today.toLocaleString(loc, localeOptions).split(" ")[x];							
+						}, min_seconds_date = (c) => {
+							switch(c){
+								case 'min_sec':
+									return today.toString().split(' ').slice(4,5).join("").split(":").slice(1,3).join(":");
+									break;
+								case 'date':
+									return [today.getMonth()+1,today.getDate(),today.getFullYear()].join("/");
+									break;
+							}
+						}
 						return {
-							hour: today.toLocaleString(loc, localeOptions).split(" ")[0],
-							am_pm: today.toLocaleString(loc, localeOptions).split(" ")[1],
-							min_secs: today.toString().split(' ').slice(4,5).join("").split(":").slice(1,3).join(":"),
-							date:[today.getMonth()+1,today.getDate(),today.getFullYear()].join("/"),
+							hour: localeString(0),
+							am_pm: localeString(1),
+							min_secs: min_seconds_date('min_secs'),
+							date:min_seconds_date('date'),
 						}
 					})();
 				document.getElementsByClassName('date')[0].innerText = `${d.date} ${d.hour}:${d.min_secs} ${d.am_pm}`;

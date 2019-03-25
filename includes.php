@@ -1,3 +1,3 @@
 <?php
 include_once './errorhandler.php';
-include_once './action_tests.php';
+include_once './tests/action_tests.php';

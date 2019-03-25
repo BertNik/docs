@@ -66,7 +66,12 @@ const Note = function Note(){
 			const result = await getList.json();
 			if(result.success){
 				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
-					return `<a href="/#/${val}"><li><table><span class="getNote" data="${val}">${val}</span><i class="fa fa-trash-o fa-lg delete" data="${val}"></i></li></a>`;
+					return `<a href="/#/${val}">
+								<li>
+									<span class="getNote" data="${val}">${val}</span>
+									<i class="fa fa-trash-o fa-lg delete" data="${val}"></i>
+								</li>
+							</a>`;
 				}).join("")}`;
 				const setEvents = (() =>{
 					const deleteNoteByNoteNameHandler = (() => {

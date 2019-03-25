@@ -48,7 +48,7 @@ class Action{
         $isSaveData = isset($_GET['cmd']) && $_GET['cmd'] === 'save' && $noFileName;
         $isGetListItems = isset($_GET['cmd']) && $_GET['cmd'] === 'getListItems';
         $isCreateNote = isset($_GET['filename']) && $_GET['filename'] === '';
-        $isDelete = $_GET['filename'] && isset($_GET['cmd']) 
+        $isDelete = isset($_GET['filename']) && $_GET['filename'] && isset($_GET['cmd']) 
                     && $_GET['filename'] !== '' && $_GET['cmd'] === 'delete' 
                     && $_SERVER['REQUEST_METHOD'] === 'DELETE';
         

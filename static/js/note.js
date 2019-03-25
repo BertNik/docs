@@ -46,7 +46,8 @@ const Note = function Note(){
 				getJsonData = await getTextData.json();
 				document.getElementById('filename').value = filename !== undefined ? filename : document.getElementById('filename').value;
 			}catch(e){
-				throw "Response could not be JSON parsed.";
+				return;
+				//throw "Response could not be JSON parsed.";
 			}
 			if(getJsonData.success || getJsonData.success === ""){
 				document.getElementsByClassName('textarea')[0].innerText = atob(decodeURIComponent(getJsonData.success) ).trim();

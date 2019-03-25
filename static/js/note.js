@@ -48,7 +48,7 @@ const Note = function Note(){
 				throw "Response could not be JSON parsed.";
 			}
 			if(getJsonData.success || getJsonData.success === ""){
-				document.getElementsByClassName('textarea')[0].innerText = atob(getJsonData.success).trim();
+				document.getElementsByClassName('textarea')[0].innerText = atob(decodeURIComponent(getJsonData.success) ).trim();
 			}else{
 				//throw "Unable to get note.";
 			}
@@ -137,7 +137,7 @@ const Note = function Note(){
 				return fetch(url,{
 					method:'POST',
 					headers: {'Content-type':'application/x-www-form-urlencoded'},
-					body: `data=${JSON.stringify({text:btoa(document.getElementsByClassName('textarea')[0].innerText)})}`
+					body: `data=${JSON.stringify({text:encodeURIComponent(btoa(document.getElementsByClassName('textarea')[0].innerText)) })}`
 				})
 			})();
 			let result;

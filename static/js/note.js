@@ -30,6 +30,7 @@ const Note = function Note(){
 			setInterval(getDate, 1000*20);
 			getDate();
 			Module.getListItems();
+			Module.keyHandler();
 			window.onhashchange = Module.hashChange;
 		})
 	}

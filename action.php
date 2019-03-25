@@ -83,7 +83,7 @@ class Action{
     public function getListItems(){
         $dirs = scandir($this->noteDir);
         $removeHidden = function($dirs){
-            return !preg_match(',^\.,i',$dirs) && !preg_match(',php$,i',$dirs);
+            return !preg_match(',^\.,i',$dirs) && !preg_match(',php$,i',$dirs) && preg_match(',.txt$,i',$dirs);
         };
         $removeExt = function($a){
             return str_replace($this->noteExtension, "", $a);

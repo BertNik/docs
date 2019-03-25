@@ -4,8 +4,16 @@ const Note = function Note(){
 	Module.init = function(){
 		return document.addEventListener("DOMContentLoaded", function() {
 			const getDate = function getDate () {
-				const today = new Date();
-				document.getElementsByClassName('date')[0].innerText =  [today.getMonth(),today.getDate(),today.getFullYear()].join("/") + " " + today.toString().split(' ').slice(4,6).join(" ");
+				const d = (()=>{
+						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US';
+						return {
+							hour: today.toLocaleString(loc, localeOptions).split(" ")[0],
+							am_pm: today.toLocaleString(loc, localeOptions).split(" ")[1],
+							min_secs: today.toString().split(' ').slice(4,5).join("").split(":").slice(1,3).join(":"),
+							date:[today.getMonth()+1,today.getDate(),today.getFullYear()].join("/"),
+						}
+					})();
+				document.getElementsByClassName('date')[0].innerText = `${d.date} ${d.hour}:${d.min_secs} ${d.am_pm}`;
 			}
 			setInterval(getDate, 1000*20);
 			getDate();

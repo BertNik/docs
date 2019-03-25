@@ -54,20 +54,25 @@ const Note = function Note(){
 			const result = await getList.json();
 			if(result.success){
 				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
-					return `<a href="/#/${val}"><li><span class="getNote" data="${val}">${val}</span><i class="fa fa-trash-o fa-lg delete" data="${val}"></i></li></a>`;
+					return `<a href="/#/${val}"><li><table><span class="getNote" data="${val}">${val}</span><i class="fa fa-trash-o fa-lg delete" data="${val}"></i></li></a>`;
 				}).join("")}`;
-				[...document.querySelectorAll('.getNote')].map((a)=>{
-					a.addEventListener('click',(e)=>{
-						Module.getData(e.target.getAttribute('data'));
+				const setEvents = (() =>{
+					const deleteNoteByNoteNameHandler = (() => {
+						[...document.querySelectorAll('.delete')].map((a)=>{
+							a.addEventListener('click',(e)=>{
+								e.preventDefault();
+								Module.delete(e.target.getAttribute('data'));
+							})
+						});
+					})(), getDataByNoteNameHandler = (() => {
+						[...document.querySelectorAll('.getNote')].map((a)=>{
+							a.addEventListener('click',(e)=>{
+								Module.getData(e.target.getAttribute('data'));
 
-					})
-				});
-				[...document.querySelectorAll('.delete')].map((a)=>{
-					a.addEventListener('click',(e)=>{
-						e.preventDefault();
-						Module.delete(e.target.getAttribute('data'));
-					})
-				});
+							})
+						});
+					})()
+				})();
 			}else{
 				throw "Unable to get List Items.";
 			}

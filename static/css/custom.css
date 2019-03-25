@@ -28,6 +28,7 @@
     min-width: 220px;
     width: 28%;
     text-align: left;
+    max-width: 300px;
 }
 .getNote{
   float:left;

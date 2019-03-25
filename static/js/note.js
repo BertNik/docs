@@ -66,11 +66,12 @@ const Note = function Note(){
 			})();
 			const result = await getList.json();
 			if(result.success){
-				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val)=>{
+				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val,i)=>{
 					return `<a href="/#/${val}">
 								<li>
-									<span class="getNote" data="${val}">${val}</span>
-									<i class="fa fa-trash-o fa-lg delete" data="${val}"></i>
+									<span id="getNote-${i}" class="getNote" data="${val}">${val}</span>
+									 <i class="fa fa-pencil fa-lg edit data="${val}" ref="${i}"></i>
+									<i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i>
 								</li>
 							</a>`;
 				}).join("")}`;
@@ -86,6 +87,22 @@ const Note = function Note(){
 						[...document.querySelectorAll('.getNote')].map((a)=>{
 							a.addEventListener('click',(e)=>{
 								Module.getData(e.target.getAttribute('data'));
+
+							})
+						});
+					})(), editNoteNameHandler = (() => {
+						[...document.querySelectorAll('.edit')].map((a)=>{
+							a.addEventListener('click',(e)=>{
+								e.preventDefault();
+								const ele = document.getElementById(`getNote-${e.target.getAttribute('ref')}`);
+								const inp = document.createElement('input');
+								inp.setAttribute('value',ele.innerText);
+								ele.innerHTML = inp.outerHTML;
+								ele.querySelector('input').onblur = (e)=>{
+									console.log(e);
+									Module.save(e.target.value)
+								};
+								//Module.getData(e.target.getAttribute('data'));
 
 							})
 						});

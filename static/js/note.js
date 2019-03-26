@@ -4,7 +4,7 @@ const Note = function Note(){
 	Module.init = function init(){
 		document.addEventListener("DOMContentLoaded", function() {
 			const getDate = function getDate () {
-				const d = (()=>{
+				const {date,hour,min_secs,am_pm} = (()=>{
 						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US',
 						localeString = (x) => {
 							return today.toLocaleString(loc, localeOptions).split(" ")[x];							
@@ -25,7 +25,7 @@ const Note = function Note(){
 							date:min_seconds_date('date'),
 						}
 					})();
-				document.getElementsByClassName('date')[0].innerText = `${d.date} ${d.hour}:${d.min_secs} ${d.am_pm}`;
+				document.getElementsByClassName('date')[0].innerText = `${date} ${hour}:${min_secs} ${am_pm}`;
 			}
 			setInterval(getDate, 1000*20);
 			getDate();

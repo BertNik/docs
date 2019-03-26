@@ -25,7 +25,7 @@
     position: absolute;
     left: 69%;
     overflow: hidden;
-    min-width: 220px;
+    min-width: 248px;
     width: 28%;
     text-align: left;
     max-width: 300px;
@@ -34,13 +34,14 @@
   float:left;
   padding-right:10px;
   padding-bottom:10px;
-  width: 150px;
+  width: 136px;
 }
-.delete{
+.delete, .edit{
   float:right;
-  padding-right:10px;
+  padding-right:20px;
   padding-bottom:10px;
   width: 10px;
+  cursor: pointer;
 }
 .container{
     position: absolute;
@@ -62,6 +63,9 @@ body > div > div.note_list > span.date{
   font-size: 0.7em;
   font-style: italic;
   color: #000;
+}
+a{
+  color:black
 }
 body > div > div.note_list > span.icons{
   display:none;

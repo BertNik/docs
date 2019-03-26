@@ -5,6 +5,7 @@
         <script type="text/javascript" src="/static/js/note.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <title>Notes</title>
+        <noscript>Your browser does not support JavaScript!</noscript>
    </head>
    <body>
         <div class="container"></div>

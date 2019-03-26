@@ -3,6 +3,7 @@ const Note = function Note(){
 	const Module = {},actionURL = 'action.php';
 	Module.init = function init(){
 		document.addEventListener("DOMContentLoaded", function() {
+			document.querySelector('.container').innerHTML = Module.HTMLSkeleton();
 			const getDate = function getDate () {
 				const {date,hour,min_secs,am_pm} = (()=>{
 						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US',
@@ -124,7 +125,7 @@ const Note = function Note(){
 	Module.delete = (filename) => {
 		const url = `/${actionURL}?cmd=delete&filename=${(filename !== undefined ? filename : document.getElementById('filename').value)}`;
 		(async function del(){
-			const getData = await (function(){
+			const getData = await (()=>{
 				return fetch(url,{
 					method:'DELETE',
 					headers: {'Content-type':'application/x-www-form-urlencoded'},
@@ -199,6 +200,27 @@ const Note = function Note(){
 					canSave = true;
 				})() : undefined;
 		}
+	}
+	Module.HTMLSkeleton = () => {
+		return `<div class="note">
+						<span class="date"></span>
+						<span class="icons">
+							<i class="fa fa-pencil fa-lg" ></i>
+							<i class="fa fa-trash-o fa-lg" ></i>
+						</span>
+						<div class="markdown-body textarea" contenteditable="true">
+					  </div>
+					  <input id="filename" type="hidden">
+					</div>
+					  <div class="note_list">
+						<span class="date">Note List</span>
+							<span class="icons">
+								<i class="fa fa-pencil fa-lg" ></i>
+								<i class="fa fa-trash-o fa-lg" ></i>
+							</span>
+							<div class="markdown-body list" contenteditable="false">
+						</div>
+					  </div>`;
 	}
 	return {
 		init:Module.init,

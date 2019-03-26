@@ -77,37 +77,44 @@ const Note = function Note(){
 				}).join("")}`;
 				const setEvents = (() =>{
 					const deleteNoteByNoteNameHandler = (() => {
-						[...document.querySelectorAll('.delete')].map((a)=>{
-							a.addEventListener('click',(e)=>{
-								e.preventDefault();
-								Module.delete(e.target.getAttribute('data'));
-							})
+						const qsa = (cl, e, ca)=>{
+							[...document.querySelectorAll(cl)].map((a)=>{
+								a.addEventListener(e,(e)=>{
+									e.preventDefault();
+									switch(ca){
+										case 1:
+											Module.delete(e.target.getAttribute('data'));
+											break;
+										case 2:
+											if(e.target.tagName === "INPUT") return;
+											Module.getData(e.target.getAttribute('data'));
+											break;
+										case 3:
+											e.preventDefault();
+											const ele = document.getElementById(`getNote-${e.target.getAttribute('ref')}`),
+											inp = document.createElement('input');
+											inp.setAttribute('value',ele.innerText);
+											ele.innerHTML = inp.outerHTML;
+											ele.querySelector('input').onblur = (e)=>{
+												Module.save(e.target.value)
+											};
+											break;
+									}
+									
+								})
+							});
+						};
+						const cases = [
+							{cl:'.delete',e:'click',ca:1},
+							{cl:'.getNote',e:'click', ca:2},
+							{cl:'.edit', e:'click', ca:3}
+						];
+						cases.map((i)=>{
+							let {cl,e,ca} = i;
+							qsa(cl,e,ca);
 						});
-					})(), getDataByNoteNameHandler = (() => {
-						[...document.querySelectorAll('.getNote')].map((a)=>{
-							a.addEventListener('click',(e)=>{
-								if(e.target.tagName === "INPUT") return;
-								Module.getData(e.target.getAttribute('data'));
-
-							})
-						});
-					})(), editNoteNameHandler = (() => {
-						[...document.querySelectorAll('.edit')].map((a)=>{
-							a.addEventListener('click',(e)=>{
-								e.preventDefault();
-								const ele = document.getElementById(`getNote-${e.target.getAttribute('ref')}`);
-								const inp = document.createElement('input');
-								inp.setAttribute('value',ele.innerText);
-								ele.innerHTML = inp.outerHTML;
-								ele.querySelector('input').onblur = (e)=>{
-									console.log(e);
-									Module.save(e.target.value)
-								};
-								//Module.getData(e.target.getAttribute('data'));
-
-							})
-						});
-					})()
+					})();
+					
 				})();
 			}else{
 				throw "Unable to get List Items.";
@@ -135,8 +142,6 @@ const Note = function Note(){
 					console.log(result.warning);
 				}
 				Module.getListItems();
-			}else if(false && !noQueryParams && !queryParams.has("note")){
-				throw "Unable to get file.";
 			}
 		})()
 	}
@@ -176,10 +181,11 @@ const Note = function Note(){
 		})()
 	}
 	Module.keyHandler = () => {
-		let timeStamps = [], canSave = true;
+		const timeStamps = [];
+		let canSave = true;
 		document.querySelector('.note').onkeydown = function (e) {
 			timeStamps.push(e.timeStamp);
-			let diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
+			const diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
 			diff > .5 || canSave ? (async function a(){
 					canSave = false;
 					const p = await (function(){
@@ -193,7 +199,6 @@ const Note = function Note(){
 					canSave = true;
 				})() : undefined;
 		}
-		//document.onkeydown(new Event('onkeydown'));
 	}
 	return {
 		init:Module.init,

@@ -67,37 +67,44 @@ const Note = function Note(){
 			})();
 			const result = await getList.json();
 			if(result.success){
-				document.querySelector('.list').innerHTML = `${JSON.parse(result.success).map((val,i)=>{
-					return `<a href="/#/${val}">
-								<li>
-									<span id="getNote-${i}" class="getNote" data="${val}">${val}</span>
-									 <i class="fa fa-pencil fa-lg edit data="${val}" ref="${i}"></i>
-									<i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i>
-								</li>
-							</a>`;
-				}).join("")}`;
+				document.querySelector('.list').innerHTML = `<table>
+															  <tr>
+																<th></th>
+																<th></th>
+																<th></th>
+															  </tr>
+															  ${JSON.parse(result.success).map((val,i)=>{
+																	return `<tr>
+																		<td><a href="/#/${val}"><span id="getNote-${i}" class="getNote" data="${val}">${val}</span></a></td>
+																		<td><i class="fa fa-pencil fa-lg edit" data="${val}" ref="${i}"></i></td>
+																		<td><i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i></td>
+																				
+																			</tr>`}).join("")}
+															</table>`;
+				 
 				const setEvents = (() =>{
 					const deleteNoteByNoteNameHandler = (() => {
 						const qsa = (cl, e, ca)=>{
 							[...document.querySelectorAll(cl)].map((a)=>{
 								a.addEventListener(e,(e)=>{
-									e.preventDefault();
+									
 									switch(ca){
-										case 1:
+										case 'delete':
+											e.preventDefault();
 											Module.delete(e.target.getAttribute('data'));
 											break;
-										case 2:
+										case 'getData':
 											if(e.target.tagName === "INPUT") return;
 											Module.getData(e.target.getAttribute('data'));
 											break;
-										case 3:
+										case 'edit':
 											e.preventDefault();
 											const ele = document.getElementById(`getNote-${e.target.getAttribute('ref')}`),
 											inp = document.createElement('input');
 											inp.setAttribute('value',ele.innerText);
 											ele.innerHTML = inp.outerHTML;
-											ele.querySelector('input').onblur = (e)=>{
-												Module.save(e.target.value)
+											ele.querySelector('input').onblur = (e) => {
+												Module.save(e.target.value);
 											};
 											break;
 									}
@@ -106,9 +113,9 @@ const Note = function Note(){
 							});
 						};
 						const cases = [
-							{cl:'.delete',e:'click',ca:1},
-							{cl:'.getNote',e:'click', ca:2},
-							{cl:'.edit', e:'click', ca:3}
+							{cl:'.delete',e:'click',ca:'delete'},
+							{cl:'.getNote',e:'click', ca:'getData'},
+							{cl:'.edit', e:'click', ca:'edit'}
 						];
 						cases.map((i)=>{
 							let {cl,e,ca} = i;
@@ -172,9 +179,9 @@ const Note = function Note(){
 			}catch(e){
 				throw "Result could not be JSON parsed."; 
 			} 
+			Module.getListItems();
 			if(result.success){
 				document.getElementById('filename').value = result.success;
-				Module.getListItems();
 				if(result.warning){
 					console.log(result.warning);
 				}

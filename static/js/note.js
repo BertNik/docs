@@ -212,8 +212,8 @@ const Note = function Note(){
 		return `<div class="note">
 						<span class="date"></span>
 						<span class="icons">
-							<i class="fa fa-pencil fa-lg" ></i>
-							<i class="fa fa-trash-o fa-lg" ></i>
+							<i class="fa fa-pencil fa-lg hide" ></i>
+							<i class="fa fa-trash-o fa-lg hide" ></i>
 						</span>
 						<div class="markdown-body textarea" contenteditable="true">
 					  </div>

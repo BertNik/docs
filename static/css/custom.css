@@ -1,40 +1,29 @@
-.note {
+ a .container{
+  display:flex;
+  flex-wrap:wrap;
+
+}
+.note, .note_list {
     background: #eee;
     box-shadow: #999 1px 1px 3px;
-    margin: auto;
-    padding-top: 40px;
-    min-height: 200px;
-    display: block;
-    position: absolute;
-    width: 65%;
-    left: 11px;
+    margin-right: 21px;
+    height: 53%;
+    position: relative;
+    width: 62%;
     overflow: hidden;
-    /* max-width: 700px; */
-    min-width: 262px;
+    min-width: 300px;
+}
+ .note_list {
+    width: 32%;
 }
 .list{
   text-align: left !important;
-}
-.note_list{
-    background: #eee;
-    box-shadow: #999 1px 1px 3px;
-    margin: auto;
-    padding-top: 40px;
-    min-height: 200px;
-    display: block;
-    position: absolute;
-    left: 69%;
-    overflow: hidden;
-    min-width: 248px;
-    width: 28%;
-    text-align: left;
-    max-width: 300px;
 }
 .getNote{
   float:left;
   padding-right:10px;
   padding-bottom:10px;
-  width: 136px;
+  width: 100%;
 }
 .delete, .edit{
   float:right;
@@ -42,27 +31,30 @@
   padding-bottom:10px;
   width: 10px;
   cursor: pointer;
+
 }
+.edit{
+    padding-left: 100%;
+}
+
 .container{
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
-    min-width: 535px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: hidden;
 }
-body > div > div.note_list > span.date{
-    /* position: absolute; */
-    /* top: 15px; */
-    /* left: 44%; */
-    /* padding: 0px; */
-}
+
 .date {
-  position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   padding: 15px;
   font-size: 0.7em;
   font-style: italic;
   color: #000;
+  position: relative;
 }
 a{
   color:black
@@ -88,4 +80,43 @@ div[contenteditable] {
     background: #f9f9f9;
     list-style: none;
     text-align: left;
+    height: 10px;
 }
+.hide{
+  display: none !important;
+}
+ @media screen and (max-width: 915px) {
+    .note, .note_list {
+        margin-right: 21px;
+        height: 53%;
+        position: relative;
+        width: 55%;
+        overflow: hidden;
+    }
+     .note_list {
+        width: 35%;
+        margin:0 auto;
+    }
+    body{
+      width: 97%;
+    }
+ }
+ @media screen and (max-width: 748px) {
+    .note, .note_list {
+        margin: 5px;
+        height: 53%;
+        position: relative;
+        width: 94% !important;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+     .note_list {
+       width: 35%;
+       margin: 5px;
+    }
+    body{
+      width: 97%;
+    }
+    
+    
+ }

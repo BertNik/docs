@@ -71,21 +71,21 @@ const Note = function Note(){
 			})();
 			const result = await getList.json();
 			if(result.success){
-				document.querySelector('.list').innerHTML = `<table>
-															  <tr>
-																<th></th>
-																<th></th>
-																<th></th>
-															  </tr>
-															  ${JSON.parse(result.success).map((val,i)=>{
-																	return `<tr>
-																		<td class="filename"><a href="/#/${val}"><span id="getNote-${i}" class="getNote" data="${val}">${val}</span></a></td>
-																		<td><i class="fa fa-pencil fa-lg edit" data="${val}" ref="${i}"></i></td>
-																		<td><i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i></td>
-																				
-																			</tr>`}).join("")}
-															</table>`;
-				 
+				const rows = JSON.parse(result.success)
+					.map((val,i)=>{return `<tr>
+									<td class="filename"><a href="/#/${val}"><span id="getNote-${i}" class="getNote" data="${val}">${val}</span></a></td>
+									<td><i class="fa fa-pencil fa-lg edit" data="${val}" ref="${i}"></i></td>
+									<td><i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i></td>
+								</tr>`}).join("");
+				const table = `<table>
+									  <tr>
+										<th></th>
+										<th></th>
+										<th></th>
+									  </tr>
+									  ${rows}
+								</table>`;
+				document.querySelector('.list').innerHTML = table;
 				const setEvents = (() =>{
 					const deleteNoteByNoteNameHandler = (() => {
 						const qsa = (cl, e, ca)=>{

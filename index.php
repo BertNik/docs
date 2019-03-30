@@ -9,5 +9,8 @@
    </head>
    <body>
         <div class="container"></div>
+        <div class="col-sm-2 col-xs-4 text-center">
+            <div class="spinner-loader"> </div>
+        </div>
    </body>
 </html>

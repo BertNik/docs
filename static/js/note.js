@@ -122,7 +122,8 @@ const Note = function Note(){
 							qsa(cl,e,ca);
 						});
 					})();
-					
+				
+
 				})();
 			}else{
 				throw "Unable to get List Items.";
@@ -207,6 +208,12 @@ const Note = function Note(){
 					canSave = true;
 				})() : undefined;
 		}
+	}
+	Module.showSpinner = () => {
+		document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'block';
+	}
+	Module.hideSpinner = () => {
+		document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'none';
 	}
 	Module.HTMLSkeleton = () => {
 		return `<div class="note">

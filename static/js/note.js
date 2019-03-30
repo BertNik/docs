@@ -215,7 +215,7 @@ const Note = function Note(){
 							<i class="fa fa-pencil fa-lg hide" ></i>
 							<i class="fa fa-trash-o fa-lg hide" ></i>
 						</span>
-						<div class="markdown-body textarea" contenteditable="true">
+						<div class="markdown-body textarea" spellcheck="true" contenteditable="true">
 					  </div>
 					  <input id="filename" type="hidden">
 					</div>

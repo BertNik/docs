@@ -75,7 +75,7 @@ const Note = function Note(){
 															  </tr>
 															  ${JSON.parse(result.success).map((val,i)=>{
 																	return `<tr>
-																		<td><a href="/#/${val}"><span id="getNote-${i}" class="getNote" data="${val}">${val}</span></a></td>
+																		<td class="filename"><a href="/#/${val}"><span id="getNote-${i}" class="getNote" data="${val}">${val}</span></a></td>
 																		<td><i class="fa fa-pencil fa-lg edit" data="${val}" ref="${i}"></i></td>
 																		<td><i class="fa fa-trash-o fa-lg delete" data="${val}" ref="${i}"></i></td>
 																				

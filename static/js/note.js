@@ -35,8 +35,10 @@ const Note = function Note(){
 			window.onhashchange = Module.hashChange;
 		})
 	}
-	Module.getData = (filename) => {
-		(async function getData(){
+	Module.getData = (filename) => { 
+		Module.animations().showSpinner();
+		(async function getData(){ 
+			await Module.animations().fadeOut(document.body,1);
 			const getTextData = await (function getTextData(filename) {
 				return fetch(`/${actionURL}?cmd=getData&filename=${filename}`,{
 					method:'GET',
@@ -55,6 +57,8 @@ const Note = function Note(){
 			}else{
 				//throw "Unable to get note.";
 			}
+			Module.animations().fadeIn(document.body,1);
+			Module.animations().hideSpinner();
 		})();
 	}
 	Module.getListItems = () =>{

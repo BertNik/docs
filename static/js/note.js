@@ -209,11 +209,50 @@ const Note = function Note(){
 				})() : undefined;
 		}
 	}
-	Module.showSpinner = () => {
-		document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'block';
-	}
-	Module.hideSpinner = () => {
-		document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'none';
+	Module.animations = () => {
+		const showSpinner = () => {
+			document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'block';
+		}
+		const hideSpinner = () => {
+			document.querySelector('div.col-sm-2.col-xs-4.text-center').style.display = 'none';
+		}
+		const fadeIn = (...t) => {
+			return new Promise((res,rej)=>{
+				if(t.length < 1){
+					const e = new Error('no parameters');
+					rej(e);
+					throw e;
+				}
+				let count = 0, id = setInterval( (()=>{
+					if(count > 98) {
+						count = 0;
+						clearInterval(id);
+						res(t[0].style.opacity = 1);
+					}else t[0].style.opacity = `.${(++count).toString().padStart(2,"0")}`;
+				}).bind(null,t[0]), t.length > 1 ? t[1] : 10)
+			});
+		}
+		const fadeOut = (...t) => {
+			return new Promise((res,rej)=>{
+				if(t.length < 1){
+					const e = new Error('no parameters');
+					rej(e);
+					throw e;
+				}
+				let count = 100, id = setInterval((()=>{
+					if(count < 1) {
+						clearInterval(id);
+						res(t[0].style.opacity = 0);
+					}else t[0].style.opacity = `.${(--count).toString().padStart(2,"0")}`;
+				}).bind(null,t[0]), t.length > 1 ? t[1] : 10)
+			});
+		}
+		return {
+			showSpinner:showSpinner,
+			hideSpinner:hideSpinner,
+			fadeIn:fadeIn,
+			fadeOut:fadeOut
+		}
 	}
 	Module.HTMLSkeleton = () => {
 		return `<div class="note">

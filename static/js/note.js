@@ -126,8 +126,14 @@ const Note = function Note(){
 							qsa(cl,e,ca);
 						});
 					})();
-				
+					document.querySelector('body > div.container > div.note > div').ondblclick = (e)=>{
+						Module.animations().showSpinner();
+						setTimeout(()=>{
+							window.location = "/";
+						},500);
+						
 
+					}
 				})();
 			}else{
 				throw "Unable to get List Items.";

@@ -2,7 +2,12 @@ a .container {
     display: flex;
     flex-wrap: wrap;
 }
-
+table{
+    width:100%;
+}
+.filename{
+    width:100%;
+}
 .note, .note_list {
     background: #eee;
     box-shadow: #999 1px 1px 3px;
@@ -36,11 +41,6 @@ a .container {
     width: 10px;
     cursor: pointer;
 }
-
-.edit {
-    padding-left: 106%;
-}
-
 a .container {
     display: flex;
     flex-wrap: wrap;
@@ -79,17 +79,6 @@ a .container {
     width: 10px;
     cursor: pointer;
 }
-
-.edit {
-    position: absolute;
-    right: 40px;
-}
-
-.delete {
-    position: absolute;
-    right: 10px;
-}
-
 .container {
     position: relative;
     width: 100%;

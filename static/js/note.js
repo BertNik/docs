@@ -127,7 +127,7 @@ const Note = function Note(){
 							qsa(cl,e,ca);
 						});
 					})();
-					['div.note', 'div.note_list'].forEach((a)=>{
+					['div.note'].forEach((a)=>{
 						document.querySelector(a).ondblclick = (e)=>{
 							Module.animations().showSpinner();
 							setTimeout(()=>{

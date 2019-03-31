@@ -70,9 +70,14 @@ class Action{
         $warning = "";
         $name = $_GET['filename'];
         $text =  json_decode($_POST['data'],true)['text'];
+        $name = (function($name){
+            $pat = ",/,";
+            $sub = $name;
+            if(preg_match($pat, $sub, $matches))return $name = preg_replace($pat, "_", $sub);
+            else return $name;
+        })($name);
         if(base64_encode(base64_decode($text)) === $text){
             $fileCreated = file_put_contents($this->noteDir.$name.$this->noteExtension, $text);
-            
         }else{
             $text = base64_decode($text);
             $warning = "data saved may have been corrupted.";

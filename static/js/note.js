@@ -50,12 +50,9 @@ const Note = function Note(){
 				document.getElementById('filename').value = filename !== undefined ? filename : document.getElementById('filename').value;
 			}catch(e){
 				return;
-				//throw "Response could not be JSON parsed.";
 			}
 			if(getJsonData.success || getJsonData.success === ""){
 				document.getElementsByClassName('textarea')[0].innerText = atob(decodeURIComponent(getJsonData.success) ).trim();
-			}else{
-				//throw "Unable to get note.";
 			}
 			Module.animations().fadeIn(document.body,1);
 			Module.animations().hideSpinner();
@@ -171,9 +168,6 @@ const Note = function Note(){
 			return url.slice(url.indexOf("#")+2);
 		}
 		const newPath = getHash(e.newURL);
-		//const oldPath = getHash( e.oldURL);
-		//Module.delete(oldPath);
-		//Module.save(newPath);
 		Module.getListItems();
 	}
 	Module.save = (filename) => {

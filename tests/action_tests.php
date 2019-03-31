@@ -9,7 +9,7 @@ class Action_Tests{
         return $this;
     }
 
-    public static function test($arg){
+    public static function test($arg, $allArgs){
         
         self::$definedCases = [
             'noFileName',
@@ -24,7 +24,7 @@ class Action_Tests{
             'listTestCases',
             
         ];
-        $runTest = function($case){
+        $runTest = function($case, $allArgs){
             switch($case){
                 case 'noFileName':
                     $_GET['filename'] = '';
@@ -65,6 +65,15 @@ class Action_Tests{
                 case 'listTestCases':
                     die(var_dump(self::$definedCases));
                     break;
+                case 'regexFileName':
+                    $pat = ",/,";
+                    $sub = $allArgs[1];
+                    $out = preg_match($pat, $sub, $matches);
+                    if($out){
+                        die(var_dump(preg_replace($pat, "_", $sub)));
+                    }else{
+                        die('no match');
+                    }
                 default:
                     echo isset($arg) ? sprintf("%s\n", $arg) : '[no arg]';
                     break;
@@ -89,7 +98,7 @@ class Action_Tests{
             unset(self::$definedCases[count(self::$definedCases)-1]);
             array_map($runTest, self::$definedCases);
         }else{
-            $runTest($arg);
+            $runTest($arg, $allArgs);
         }
     }
 }

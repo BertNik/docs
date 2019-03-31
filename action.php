@@ -16,7 +16,7 @@ class Action{
             $numberArgs = count($_SERVER['argv']);
             if($numberArgs > 1){
                 $args = array_splice($_SERVER['argv'], 1);
-                $testCases::test($args[0]);
+                $testCases::test($args[0], $args);
             }  
         }
         $response = $this->actions();

@@ -110,6 +110,7 @@ const Note = function Note(){
 											ele.querySelector('input').onblur = (e) => {
 												Module.save(e.target.value);
 											};
+											ele.firstElementChild.select()
 											break;
 									}
 									

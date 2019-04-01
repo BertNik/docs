@@ -55,6 +55,7 @@ a .container {
     width: 62%;
     overflow: hidden;
     min-width: 300px;
+    height: 98% !important;
 }
 
 .note_list {
@@ -137,6 +138,7 @@ div[contenteditable] {
     list-style: none;
     text-align: left;
     height: 10px;
+    overflow:auto;
 }
 
 .hide {
@@ -218,6 +220,7 @@ body > div > div.note_list > span.icons {
 }
 
 div[contenteditable] {
+    position:relative;
     font-size: 1.2em;
     font-family: 'Source Sans Pro', sans-serif;
     border: none;
@@ -228,7 +231,8 @@ div[contenteditable] {
     background: #f9f9f9;
     list-style: none;
     text-align: left;
-    height: 10px;
+    overflow: auto;
+    height: 100%;
 }
 
 .hide {
@@ -262,6 +266,7 @@ div[contenteditable] {
         width: 94% !important;
         overflow: hidden;
         margin-bottom: 10px;
+        height: 46% !important;
     }
 
     .note_list {

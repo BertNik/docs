@@ -105,9 +105,11 @@ const Note = function Note(){
 											inp.setAttribute('value',ele.innerText);
 											ele.innerHTML = inp.outerHTML;
 											ele.querySelector('input').onblur = (e) => {
+												const hasEdit = 'edit' in e.target.attributes;
 												Module.save(e.target.value);
 											};
-											ele.firstElementChild.select()
+											ele.firstElementChild.select();
+											ele.firstElementChild.setAttribute('edit',false);
 											break;
 									}
 									

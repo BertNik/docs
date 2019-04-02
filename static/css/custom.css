@@ -48,7 +48,7 @@ a .container {
 
 .note, .note_list {
     background: #eee;
-    box-shadow: #999 1px 1px 3px;
+    box-shadow: #999 2px 1px 3px;
     margin-right: 21px;
     height: 53%;
     position: relative;
@@ -195,7 +195,7 @@ div[contenteditable] {
 }
 
 .date {
-    top: 1px;
+    top: 4px;
     left: 0;
     padding: 15px;
     font-size: 0.7em;
@@ -225,8 +225,8 @@ div[contenteditable] {
     font-family: 'Source Sans Pro', sans-serif;
     border: none;
     box-shadow: none;
-    margin: 0px;
-    padding: 10px 20px 10px;
+    margin: 8px 0 0 0;
+    padding: 18px 20px 10px;
     min-height: 300px;
     background: #f9f9f9;
     list-style: none;

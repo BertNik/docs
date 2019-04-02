@@ -54,6 +54,7 @@ a .container {
     background: #eee;
     box-shadow: #999 2px 1px 3px;
     margin-right: 21px;
+    margin-left: auto;
     height: 53%;
     position: relative;
     width: 62%;
@@ -197,6 +198,7 @@ div[contenteditable] {
     flex-wrap: wrap;
     flex-direction: row;
     overflow: hidden;
+    text-align: center;
 }
 
 .date {
@@ -246,8 +248,9 @@ div[contenteditable] {
 
 @media screen and (max-width: 915px) {
     .note, .note_list {
-        margin-right: 21px;
+        margin-right: auto;
         height: 53%;
+        margin-left: auto;
         position: relative;
         width: 55%;
         overflow: hidden;
@@ -255,7 +258,7 @@ div[contenteditable] {
 
     .note_list {
         width: 35%;
-        margin: 0 auto;
+        margin-left: auto;
     }
 
     body {
@@ -265,7 +268,7 @@ div[contenteditable] {
 
 @media screen and (max-width: 748px) {
     .note, .note_list {
-        margin: 5px;
+        margin-left: auto;
         height: 53%;
         position: relative;
         width: 94% !important;
@@ -276,7 +279,7 @@ div[contenteditable] {
 
     .note_list {
         width: 35%;
-        margin: 5px;
+        margin-left: auto;
     }
 
     body {

@@ -3,6 +3,7 @@ const Note = function Note(){
 	const Module = {},actionURL = 'action.php';
 	Module.init = function init(){
 		document.addEventListener("DOMContentLoaded", function() {
+			document.querySelector('.nav-container').innerHTML = Module.HTMLNavBar();
 			document.querySelector('.container').innerHTML = Module.HTMLSkeleton();
 			const getDate = function getDate () {
 				const {date,hour,min_secs,am_pm} = (()=>{
@@ -282,6 +283,24 @@ const Note = function Note(){
 							<div class="markdown-body list" contenteditable="false">
 						</div>
 					  </div>`;
+	}
+	Module.HTMLNavBar = () => {
+		return 	`<div class="nav">
+					  <div class="nav-header">
+						 <div class="nav-title">Notes</div>
+					  </div>
+					  <div class="nav-btn">
+						 <label for="nav-check">
+						 <span></span>
+						 <span></span>
+						 <span></span>
+						 </label>
+					  </div>
+					  <input type="checkbox" id="nav-check">
+					  <div class="nav-links">
+						 <a href="/#/file" >File</a>
+					  </div>
+			     </div>`;
 	}
 	return {
 		init:Module.init,

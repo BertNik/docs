@@ -1,11 +1,10 @@
 "use strict";
 const Note = () => {
 	const Module = {},actionURL = 'action.php';
-	Module.init = function init(){
-		document.addEventListener("DOMContentLoaded", function() {
-			document.querySelector('.nav-container').innerHTML = Module.HTMLNavBar();
-			document.querySelector('.container').innerHTML = Module.HTMLSkeleton();
-			const getDate = function getDate () {
+	Module.init = () => {
+		document.addEventListener("DOMContentLoaded", () => {
+			Module.renderHTML();
+			const getDate = () => {
 				const {date,hour,min_secs,am_pm} = (()=>{
 						const today = new Date(), localeOptions = { hour: 'numeric', hour12: true }, loc = 'en-US',
 						localeString = (x) => {
@@ -35,6 +34,18 @@ const Note = () => {
 			Module.keyHandler();
 			window.onhashchange = Module.hashChange;
 		})
+	}
+	Module.renderHTML = () => {
+		const html = [
+						 {selector:'.nav-container', html:Module.HTMLNavBar()}, 
+						 {selector:'.container', html:Module.HTMLSkeleton()}
+					 ];
+			const renderHTMLElements = ((html) => {
+				[...html].map((a)=>{
+						let {selector,html} = a;
+						Object.assign(document.querySelector(selector), {innerHTML: html});
+				})
+			})(html)
 	}
 	Module.getData = (filename) => { 
 		Module.animations().showSpinner();

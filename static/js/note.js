@@ -1,5 +1,5 @@
 "use strict";
-const Note = function Note(){
+const Note = () => {
 	const Module = {},actionURL = 'action.php';
 	Module.init = function init(){
 		document.addEventListener("DOMContentLoaded", function() {
@@ -38,9 +38,9 @@ const Note = function Note(){
 	}
 	Module.getData = (filename) => { 
 		Module.animations().showSpinner();
-		(async function getData(){ 
+		(async()=>{ 
 			await Module.animations().fadeOut(document.body,1);
-			const getTextData = await (function getTextData(filename) {
+			const getTextData = await ((filename) => {
 				return fetch(`/${actionURL}?cmd=getData&filename=${filename}`,{
 					method:'GET',
 				});
@@ -61,8 +61,8 @@ const Note = function Note(){
 	}
 	Module.getListItems = () =>{
 		const url = `/${actionURL}?cmd=getListItems`;
-		(async function gl(){
-			const getList = await (function fet() {
+		(async()=>{
+			const getList = await (() => {
 					return fetch(url,{
 						method:'GET',
 					});
@@ -144,7 +144,7 @@ const Note = function Note(){
 	}
 	Module.delete = (filename) => {
 		const url = `/${actionURL}?cmd=delete&filename=${(filename !== undefined ? filename : document.getElementById('filename').value)}`;
-		(async function del(){
+		(async()=>{
 			const getData = await (()=>{
 				return fetch(url,{
 					method:'DELETE',
@@ -175,8 +175,8 @@ const Note = function Note(){
 	}
 	Module.save = (filename) => {
 		const url = `/${actionURL}?cmd=save&filename=${(filename !== undefined ? filename : document.getElementById('filename').value)}`;
-		(async function sav(){
-			const getData = await (function(){
+		(async ()=>{
+			const getData = await (()=>{
 				return fetch(url,{
 					method:'POST',
 					headers: {'Content-type':'application/x-www-form-urlencoded'},
@@ -201,12 +201,12 @@ const Note = function Note(){
 	Module.keyHandler = () => {
 		const timeStamps = [];
 		let canSave = true;
-		document.querySelector('.note').onkeydown = function (e) {
+		document.querySelector('.note').onkeydown = (e) => {
 			timeStamps.push(e.timeStamp);
 			const diff = (timeStamps.slice(-1) - timeStamps[timeStamps.length-2])/1000;
-			diff > .5 || canSave ? (async function a(){
+			diff > .5 || canSave ? (async()=>{
 					canSave = false;
-					const p = await (function(){
+					const p = await (()=>{
 						return new Promise ((res,rej)=>{
 							setTimeout(()=>{
 								res(Module.save());

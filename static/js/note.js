@@ -26,7 +26,7 @@ const Note = () => {
 							date:min_seconds_date('date'),
 						}
 					})();
-				document.getElementsByClassName('date')[0].innerText = `${date} ${hour}:${min_secs} ${am_pm}`;
+				Object.assign(document.getElementsByClassName('date')[0], {innerText:`${date} ${hour}:${min_secs} ${am_pm}`});
 			}
 			setInterval(getDate, 1000*20);
 			getDate();
@@ -115,11 +115,11 @@ const Note = () => {
 											const ele = document.getElementById(`getNote-${e.target.getAttribute('ref')}`),
 											inp = document.createElement('input');
 											inp.setAttribute('value',ele.innerText);
-											ele.innerHTML = inp.outerHTML;
-											ele.querySelector('input').onblur = (e) => {
+											Object.assign(ele,{innerHTML:inp.outerHTML, onblur:inp.onblur});
+											Object.assign(ele.querySelector('input'), {onblur:(e) => {
 												const hasEdit = 'edit' in e.target.attributes;
 												Module.save(e.target.value);
-											};
+											}})
 											ele.firstElementChild.select();
 											ele.firstElementChild.setAttribute('edit',false);
 											break;

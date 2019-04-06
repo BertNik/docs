@@ -64,7 +64,7 @@ const Note = () => {
 				return;
 			}
 			if(getJsonData.success || getJsonData.success === ""){
-				document.getElementsByClassName('textarea')[0].innerText = atob(decodeURIComponent(getJsonData.success) ).trim();
+				document.getElementsByClassName('textarea')[0].innerText = decodeURIComponent(atob(getJsonData.success)).trim();
 			}
 			Module.animations().fadeIn(document.querySelector('.note'),1);
 			Module.animations().hideSpinner();
@@ -191,7 +191,7 @@ const Note = () => {
 				return fetch(url,{
 					method:'POST',
 					headers: {'Content-type':'application/x-www-form-urlencoded'},
-					body: `data=${JSON.stringify({text:encodeURIComponent(btoa(document.getElementsByClassName('textarea')[0].innerText)) })}`
+					body: `data=${JSON.stringify({text:btoa(encodeURIComponent(document.getElementsByClassName('textarea')[0].innerText))})}`
 				})
 			})();
 			let result;

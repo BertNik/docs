@@ -108,15 +108,15 @@ a .container {
 }
 div.col-sm-2.col-xs-4.text-center{
     display:none;
-    position: absolute;
+    position: unset;
     width: 100%;
     height: 100%;
     top: 0;
 }
 div.col-sm-2.col-xs-4.text-center > div{
-    position: relative;
-    top: 50%;
-    left: 35%;
+    position: absolute;
+    top: 42%;
+    left: 45%;
     z-index: 1000000;
 }
 a {

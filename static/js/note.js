@@ -292,6 +292,9 @@ const Note = () => {
 								<i class="fa fa-trash-o fa-lg" ></i>
 							</span>
 							<div class="markdown-body list" contenteditable="false">
+							<div class="col-sm-2 col-xs-4 text-center spinner-container">
+								<div class="spinner-loader"> </div>
+							</div>
 						</div>
 					  </div>`;
 	}

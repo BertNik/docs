@@ -272,7 +272,7 @@ div[contenteditable] {
         height: 53%;
         position: relative;
         width: 94% !important;
-        overflow: hidden;
+        overflow: auto;
         margin-bottom: 10px;
         height: 46% !important;
     }

@@ -49,8 +49,8 @@ const Note = () => {
 	}
 	Module.getData = (filename) => { 
 		Module.animations().showSpinner();
-		(async()=>{ 
-			await Module.animations().fadeOut(document.body,1);
+		(async()=>{  
+			await Module.animations().fadeOut(document.querySelector('.note'),1);
 			const getTextData = await ((filename) => {
 				return fetch(`/${actionURL}?cmd=getData&filename=${filename}`,{
 					method:'GET',
@@ -66,7 +66,7 @@ const Note = () => {
 			if(getJsonData.success || getJsonData.success === ""){
 				document.getElementsByClassName('textarea')[0].innerText = atob(decodeURIComponent(getJsonData.success) ).trim();
 			}
-			Module.animations().fadeIn(document.body,1);
+			Module.animations().fadeIn(document.querySelector('.note'),1);
 			Module.animations().hideSpinner();
 		})();
 	}

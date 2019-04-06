@@ -60,7 +60,7 @@ a .container {
     width: 62%;
     overflow: hidden;
     min-width: 300px;
-    height: 98% !important;
+    height: 100%;
     border-radius: 10px;
 }
 
@@ -70,6 +70,7 @@ a .container {
 
 .list {
     text-align: left !important;
+    height: 95% !important;
 }
 
 .getNote {
@@ -115,7 +116,8 @@ div.col-sm-2.col-xs-4.text-center{
 div.col-sm-2.col-xs-4.text-center > div{
     position: relative;
     top: 50%;
-    left: 50%;
+    left: 35%;
+    z-index: 1000000;
 }
 a {
     color: black
@@ -133,6 +135,7 @@ body > div > div.note_list > span.icons {
 }
 
 div[contenteditable] {
+    position: relative;
     font-size: 1.2em;
     font-family: 'Source Sans Pro', sans-serif;
     border: none;
@@ -143,7 +146,7 @@ div[contenteditable] {
     background: #f9f9f9;
     list-style: none;
     text-align: left;
-    height: 10px;
+    height: 100%;
     overflow:auto;
 }
 
@@ -227,19 +230,19 @@ body > div > div.note_list > span.icons {
 }
 
 div[contenteditable] {
-    position:relative;
+    position: relative;
     font-size: .9em;
     font-family: 'Source Sans Pro', sans-serif;
     border: none;
     box-shadow: none;
     margin: 8px 0 0 0;
-    padding: 18px 20px 10px;
+    padding: 0px 20px 0 10px;
     min-height: 300px;
     background: #f9f9f9;
     list-style: none;
     text-align: left;
     overflow: auto;
-    height: 100%;
+    height: 95% !important;
 }
 
 .hide {
@@ -249,7 +252,7 @@ div[contenteditable] {
 @media screen and (max-width: 915px) {
     .note, .note_list {
         margin-right: auto;
-        height: 53%;
+        height: 100%;
         margin-left: auto;
         position: relative;
         width: 55%;
@@ -274,7 +277,7 @@ div[contenteditable] {
         width: 94% !important;
         overflow: auto;
         margin-bottom: 10px;
-        height: 46% !important;
+        height: 50%;
     }
 
     .note_list {

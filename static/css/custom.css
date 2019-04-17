@@ -497,14 +497,14 @@ The presentation website was down so I created this codepen to preview the spinn
     }
     .nav > .nav-links > a {
       display: block;
-      width: 100%;
+      /* width: 100%; */
     }
     .nav > #nav-check:not(:checked) + .nav-links {
       height: 0px;
     }
     .nav > #nav-check:checked + .nav-links {
-      height: 100%;
-      overflow-y: auto;
+      height: auto;
+      width:100%;
       z-index: 100;
       border-radius: 14px;
     }

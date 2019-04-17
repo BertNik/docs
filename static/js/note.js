@@ -341,7 +341,8 @@ const Note = () => {
 					  </div>
 					  <input type="checkbox" id="nav-check">
 					  <div class="nav-links">
-						 <a href="/#/file" >File</a>
+						 <a href="/#/file" class="menu-item" data-event-id="menu-file">File</a>
+						 <a href="/#/new-note" class="menu-item" data-event-id="menu-new-note">New Note</a>
 					  </div>
 			     </div>`;
 	}

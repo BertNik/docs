@@ -168,6 +168,7 @@ const Note = () => {
 					})();
 					['div.note'].forEach((a)=>{
 						document.querySelector(a).ondblclick = (e)=>{
+							return;
 							Module.animations().showSpinner();
 							setTimeout(()=>{
 								window.location = "/";

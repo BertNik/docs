@@ -10,8 +10,6 @@
    <body>
         <div class="nav-container"></div>
         <div class="container"></div>
-        <div class="col-sm-2 col-xs-4 text-center spinner-container">
-            <div class="spinner-loader"> </div>
-        </div>
+        
    </body>
 </html>

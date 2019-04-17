@@ -33,7 +33,35 @@ const Note = () => {
 			Module.getListItems();
 			Module.keyHandler();
 			window.onhashchange = Module.hashChange;
+			Module.setMenuEvents();
 		})
+	}
+	Module.setMenuEvents = () => {
+		const menuNewNote = (arg) => {
+			Module.animations().showSpinner();
+			setTimeout(()=>{
+				window.location = "/";
+			},500);
+		}, menuFile = (arg) => {
+			console.log('executing menu file');
+		};
+
+		[...document.querySelectorAll('.menu-item')].map((a)=>{
+			a.addEventListener('click',(e)=>{
+				const {eventId} = e.target.dataset;
+				switch(eventId){
+					case 'menu-new-note':
+						menuNewNote(e);
+						break;
+					case 'menu-file':
+						menuFile(e);
+						break;
+					default:
+						console.log(e);
+						break;
+				}
+			});
+		});
 	}
 	Module.renderHTML = () => {
 		const html = [
